@@ -1,0 +1,7 @@
+yang dikerjain :
+1. Buat menu dan form2 nya sesuai dengan yang ada di manual book
+2. Untuk database disesuaikan aja dengan field yang ada di form dan disesuaikan dengan kebutuhan lu juga
+3. buat CRUD (Tambah, Ubah, Hapus dan tombol yang ada di manual book)
+
+
+https://docs.google.com/document/d/1UmY6bgcDGJCbHudWB-Qbby8T32xnwJW0_uUBfBoFWi8/edit?usp=sharing
