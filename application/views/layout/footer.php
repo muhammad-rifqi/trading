@@ -6,6 +6,13 @@
     <script src="<?= base_url();?>/assets/plugins/pace/pace.js"></script>
     <script src="<?= base_url();?>/assets/scripts/siminta.js"></script>
 
+    <script src="<?= base_url();?>/assets/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="<?= base_url();?>/assets/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTables-example').dataTable();
+        });
+    </script>
 </body>
 
 </html>
