@@ -12,20 +12,9 @@ class Admin extends CI_Controller {
         $this->load->helper(array('form', 'url', 'file'));
     }
 
-		public function login()
-        {
-            if($this->session->userdata('email')){
-                redirect('auth/dashboard');
-            }
-                $data['title'] = 'Login Aplikasi Kasir';
-                $this->load->view('tamplates/auth_header', $data);
-                $this->load->view('auth/login');
-                $this->load->view('tamplates/auth_footer');
-        }
-		
 		public function index()
         {
-			redirect('auth/login');
+			$this->load->view('admin/login');
         }
 		
         
@@ -48,10 +37,10 @@ class Admin extends CI_Controller {
                         'id_warung' => $data['log'][0]['id_warung']
                     );
                     $this->session->set_userdata($newdata);
-                    redirect(base_url() . 'auth/dashboard');
+                    redirect(base_url() . 'admin/dashboard');
                 } else {
                     $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible show fade"><div class="alert-body"><button class="close" data-dismiss="alert"><span>×</span></button>Email atau Password salah !</div></div>');
-                    redirect('auth/login');
+                    redirect('admin/login');
                 }
             
     
@@ -68,9 +57,9 @@ class Admin extends CI_Controller {
             $data['bm'] = $this->warung->total_barang_masuk($this->session->userdata('status'));
             $data['bk'] = $this->warung->total_barang_keluar($this->session->userdata('status'));
             $data['pajak'] = $this->warung->getpajak();
-            $this->load->view('tamplates/header', $data);
+            $this->load->view('layout/header', $data);
             $this->load->view('admin/dashboard', $data);
-            $this->load->view('tamplates/footer');
+            $this->load->view('layout/footer');
         }
 	
         // ini landing
@@ -94,7 +83,7 @@ class Admin extends CI_Controller {
          
             $this->db->like('nama_warung',$data['keyword']);
             $this->db->from('warung');
-			$config['base_url'] = base_url('auth/warung');
+			$config['base_url'] = base_url('admin/warung');
 			$config['total_rows'] = $this->db->count_all_results();
 			// $config['total_rows'] = $this->warung->total_warung();
 			$config['per_page'] = 5;
@@ -122,9 +111,9 @@ class Admin extends CI_Controller {
 			$d['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
             $data['page'] = $this->uri->segment(3);
 			$data['warung'] = $this->warung->getwarung($d['page'],$config["per_page"],$data['keyword'])->result_array();
-			$this->load->view('tamplates/header', $data);
+			$this->load->view('layout/header', $data);
             $this->load->view('admin/warung', $data);
-            $this->load->view('tamplates/footer');
+            $this->load->view('layout/footer');
             
         }
 
@@ -132,9 +121,9 @@ class Admin extends CI_Controller {
         {
             $data['title'] = 'Tambah Warung';
             $data['warung_active'] = 'active';
-            $this->load->view('tamplates/header', $data);
+            $this->load->view('layout/header', $data);
             $this->load->view('admin/tambah_warung', $data);
-            $this->load->view('tamplates/footer');
+            $this->load->view('layout/footer');
         }
 
         public function proses_add_warung() {
@@ -142,7 +131,7 @@ class Admin extends CI_Controller {
             $this->load->model('Admin_model','warung');
             $this->warung->insert_warung();
             $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show fade"><div class="alert-body"><button class="close" data-dismiss="alert"><span>×</span></button>Warung berhasil ditambahkan !</div></div>');
-            redirect('auth/warung');
+            redirect('admin/warung');
             
         }
 
@@ -152,16 +141,20 @@ class Admin extends CI_Controller {
             $this->load->model('admin_model', 'warung');
             $data['warung'] = $this->warung->edit_warung($id);
             $data['title'] = 'Edit warung';
-            $this->load->view('tamplates/header', $data);
+            $this->load->view('layout/header', $data);
             $this->load->view('admin/edit_warung', $data);
-            $this->load->view('tamplates/footer');
+            $this->load->view('layout/footer');
         }
 
         public function proses_ubah_warung() {
             $this->load->model('Admin_model','warung');
             $this->warung->ubah_warung();
             $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show fade"><div class="alert-body"><button class="close" data-dismiss="alert"><span>×</span></button>Warung berhasil diubah !</div></div>');
-            redirect('auth/warung');
+            redirect('admin/warung');
+        }
+
+        public function errornotfound(){
+            $this->load->view('404');
         }
 
 

@@ -1,5 +1,0 @@
-<?= $header; ?>
-
-<?= $content; ?>
-
-<?= $footer; ?>
