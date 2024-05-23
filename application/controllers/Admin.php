@@ -19,7 +19,7 @@ class Admin extends CI_Controller {
                 redirect('admin/dashboard');
             }
 
-			$this->load->view('admin');
+			$this->load->view('admin/login');
         }
 		
         
@@ -42,7 +42,7 @@ class Admin extends CI_Controller {
                     $this->session->set_userdata($newdata);
                     redirect(base_url() . 'admin/dashboard');
                 } else {
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible show fade"><div class="alert-body"><button class="close" data-dismiss="alert"><span>×</span></button>Email atau Password salah !</div></div>');
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible"><div class="alert-body"><button class="close" data-dismiss="alert"><span>×</span></button>User-ID atau Password salah !</div></div>');
                     redirect('admin');
                 }
             
@@ -149,9 +149,20 @@ class Admin extends CI_Controller {
         public function proses_ubah_warung() {
             $this->load->model('Admin_model','warung');
             $this->warung->ubah_warung();
-            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show fade"><div class="alert-body"><button class="close" data-dismiss="alert"><span>×</span></button>Warung berhasil diubah !</div></div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible"><div class="alert-body"><button class="close" data-dismiss="alert"><span>×</span></button>Warung berhasil diubah !</div></div>');
             redirect('admin/warung');
         }
+
+
+        public function logout()
+        {
+            $this->session->unset_userdata('id');
+            $this->session->unset_userdata('user_id');
+            $this->session->unset_userdata('password');
+            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible"><div class="alert-body"><button class="close" data-dismiss="alert"><span>×</span></button>Anda Berhasil Logout !</div></div>');
+            redirect('admin');
+        }
+
 
         public function errornotfound(){
             $this->load->view('404');
