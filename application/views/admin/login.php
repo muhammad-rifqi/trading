@@ -1,53 +1,62 @@
-<!doctype html>
-<html lang="en">
-   <head>
-      <!-- Required meta tags -->
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <!-- favicon -->
-      <link rel="icon" type="image/png" href="<?= base_url()?>assets/backend/assets/images/favicon.png">
-      <!-- Bootstrap CSS -->
-      <link rel="stylesheet" href="<?= base_url()?>assets/backend/assets/css/bootstrap.min.css" media="all">
-      <!-- Fonts Awesome CSS -->
-      <link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/backend/assets/css/all.min.css">
-      <!-- google fonts -->
-      <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
-      <!-- Custom CSS -->
-      <link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/backend/style.css">
-      <title>Travele | Travel & Tour HTML5 template </title>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootsrtap Free Admin Template - SIMINTA | Admin Dashboad Template</title>
+    <!-- Core CSS - Include with every page -->
+    <link href="<?= base_url();?>/assets/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="<?= base_url();?>/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="<?= base_url();?>/assets/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
+   <link href="<?= base_url();?>/assets/css/style.css" rel="stylesheet" />
+      <link href="<?= base_url();?>/assets/css/main-style.css" rel="stylesheet" />
+
 </head>
-<body>
-    <div class="login-page" style="background-image: url(<?= base_url()?>assets/backend/assets/images/bg.jpg);">
-        <div class="login-from-wrap">
-            <form class="login-from" method="POST" action="<?= base_url('admin/proses_login')?>">
-                <h1 class="site-title">
-                    <a href="#">
-                        <img src="<?= base_url()?>assets/backend/assets/images/logo.png" alt="">
-                    </a>
-                </h1>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" class="validate">
+
+<body class="body-Login-back">
+
+    <div class="container">
+       
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 text-center logo-margin ">
+              <img src="<?= base_url();?>/assets/img/logo.png" alt=""/>
                 </div>
-                <div class="form-group">
-                    <label for="last_name">Password</label>
-                    <input id="last_name" type="password" name="password" class="validate">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">                  
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Please Sign In</h3>
+                    </div>
+                    <div class="panel-body">
+                        <?= $this->session->flashdata('message');?>
+                        <form role="form" method="POST" action="<?= base_url('admin/login')?>">
+                            <fieldset>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="User-ID" name="user_id" type="user_id" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                    </label>
+                                </div>
+                                <!-- Change this to a button or input when using this as a form -->
+                                <button type="submit" class="btn btn-lg btn-success btn-block">Login</button>
+                            </fieldset>
+                        </form>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <button class="button-primary" type="submit" style="width:100%">Login</button>
-                </div>
-                <a href="<?= base_url('admin/forgotpassword')?>" class="for-pass">Forgot Password?</a>
-            </form>
+            </div>
         </div>
     </div>
 
-    <!-- *Scripts* -->
-    <script src="<?= base_url()?>assets/backend/assets/js/jquery-3.2.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="<?= base_url()?>assets/backend/assets/js/bootstrap.min.js"></script>
-    <script src="<?= base_url()?>assets/backend/assets/js/canvasjs.min.js"></script>
-    <script src="<?= base_url()?>assets/backend/assets/js/counterup.min.js"></script>
-    <script src="<?= base_url()?>assets/backend/assets/js/jquery.slicknav.js"></script>
-    <script src="<?= base_url()?>assets/backend/assets/js/dashboard-custom.js"></script>
+     <!-- Core Scripts - Include with every page -->
+    <script src="<?= base_url();?>/assets/plugins/jquery-1.10.2.js"></script>
+    <script src="<?= base_url();?>/assets/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="<?= base_url();?>/assets/plugins/metisMenu/jquery.metisMenu.js"></script>
+
 </body>
+
 </html>

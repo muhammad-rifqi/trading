@@ -1,4 +1,7 @@
 <?php
+
+defined('BASEPATH') OR exit('No direct script access allowed');
+
 class Admin_model extends CI_Model {
 
 
@@ -7,6 +10,13 @@ public function __construct()
 	parent::__construct();
 	$this->load->helper(array('form', 'url','file'));
 }
+
+public function login_process($user_id,$password)
+	{
+		$sql = $this->db->query("select * from users where user_id='".$user_id."' and password='".$password."'");
+		$data = $sql->result_array();
+		return $data;
+	}
 
 
 public function getwarung($limit,$start,$keyword)

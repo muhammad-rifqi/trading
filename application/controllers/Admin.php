@@ -8,39 +8,42 @@ class Admin extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-       
+        $this->load->library('session');
         $this->load->helper(array('form', 'url', 'file'));
     }
 
 		public function index()
         {
-			$this->load->view('admin/login');
+
+            if($this->session->userdata('user_id')){
+                redirect('admin/dashboard');
+            }
+
+			$this->load->view('admin');
         }
 		
         
-        public function proses_login()
+        public function login()
         {
-            $email = $this->input->post('email');
-            $passwords = $this->input->post('password');
-        
-                $this->load->library('session');
+                $user_id = $this->input->post('user_id');
+                $passwords = $this->input->post('password');
                 $password = md5($passwords);
-                $this->load->model('user_model', 'proses_login');
-                $data['log'] = $this->proses_login->login($email, $password);
+               
+                $this->load->model('Admin_model', 'proses_login');
+                $data['log'] = $this->proses_login->login_process($user_id, $password);
                 $cek = count($data['log']);
+               
                 if ($cek > 0) {
                     $newdata = array(
-                        'id_user' => $data['log'][0]['id_user'],
-                        'email' => $data['log'][0]['email'],
-                        'username' => $data['log'][0]['username'],
-                        'status' => $data['log'][0]['status'],
-                        'id_warung' => $data['log'][0]['id_warung']
+                        'id' => $data['log'][0]['id'],
+                        'user_id' => $data['log'][0]['user_id'],
+                        'password' => $data['log'][0]['password']
                     );
                     $this->session->set_userdata($newdata);
                     redirect(base_url() . 'admin/dashboard');
                 } else {
                     $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible show fade"><div class="alert-body"><button class="close" data-dismiss="alert"><span>×</span></button>Email atau Password salah !</div></div>');
-                    redirect('admin/login');
+                    redirect('admin');
                 }
             
     
@@ -48,18 +51,16 @@ class Admin extends CI_Controller {
 
         public function dashboard()
         {
-             is_logged_in();  
-            $data = array();
-            $data['title'] = 'Dashboard Aplikasi Kasir';
-            $data['dashboard_active'] = 'active';
-            $this->load->model('Admin_model','warung');
-            $data['warung'] = $this->warung->total_warung($this->session->userdata('status'));
-            $data['bm'] = $this->warung->total_barang_masuk($this->session->userdata('status'));
-            $data['bk'] = $this->warung->total_barang_keluar($this->session->userdata('status'));
-            $data['pajak'] = $this->warung->getpajak();
-            $this->load->view('layout/header', $data);
-            $this->load->view('admin/dashboard', $data);
-            $this->load->view('layout/footer');
+            $t['info'] = $this->session->userdata('user_id');
+		    if($t['info'] == TRUE){
+            $a['header'] =  $this->load->view('layout/header',null, true);
+            $a['footer'] =  $this->load->view('layout/footer',null, true);
+            $a['content'] =  $this->load->view('admin/dashboard',null, true);
+            $page = $this->load->view('layout/template',$a);
+            return $page;
+            }else{
+                redirect(base_url().'admin');
+            }
         }
 	
         // ini landing
@@ -68,7 +69,6 @@ class Admin extends CI_Controller {
 		
         public function warung()
         {
-
             $data = array();
             $data['title'] = 'Data Warung';
             $data['warung_active'] = 'active';
