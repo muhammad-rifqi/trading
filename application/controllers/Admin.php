@@ -55,7 +55,7 @@ class Admin extends CI_Controller {
 		    if($t['info'] == TRUE){
             $a['header'] =  $this->load->view('layout/header',null, true);
             $a['footer'] =  $this->load->view('layout/footer',null, true);
-            $a['content'] =  $this->load->view('admin/dashboard',null, true);
+            $a['content'] =  $this->load->view('admin/dashboard',$t, true);
             $page = $this->load->view('layout/template',$a);
             return $page;
             }else{
