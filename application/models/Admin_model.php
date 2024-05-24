@@ -19,10 +19,10 @@ public function login_process($user_id,$password)
 	}
 
 
-public function getwarung($limit,$start,$keyword)
+public function listgudang()
 {
 	
-	$sql = $this->db->query("select * from warung where nama_warung like '%".$keyword."%' limit ".$limit.", ".$start."");
+	$sql = $this->db->query("select * from gudang")->result_array();
 	return $sql;
 
 }
