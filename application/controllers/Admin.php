@@ -67,7 +67,7 @@ class Admin extends CI_Controller {
 
 
 		
-        public function warung()
+        public function gudang()
         {
             $t['info'] = $this->session->userdata('user_id');
 		    if($t['info'] == TRUE){
@@ -75,7 +75,7 @@ class Admin extends CI_Controller {
                 $t['gudang'] = $this->gudang->listgudang();
                 $a['header'] =  $this->load->view('layout/header',null, true);
                 $a['footer'] =  $this->load->view('layout/footer',null, true);
-                $a['content'] =  $this->load->view('admin/dashboard',$t, true);
+                $a['content'] =  $this->load->view('admin/gudang/content',$t, true);
                 $page = $this->load->view('layout/template',$a);
             }else{
                 redirect(base_url().'admin');

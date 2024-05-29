@@ -51,11 +51,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'admin/index';
 $route['admin/dashboard'] = 'admin/dashboard';
+
+$route['admin/gudang'] = 'admin/gudang';
+$route['pajak-hotel'] = 'admin/pajak_hotel';
+
 $route['bayar_pajak/(:num)'] = 'admin/bayar_pajak/$1';
 $route['detail_berita/(:num)'] = 'admin/detail_berita/$1';
 $route['admin/logout'] = 'admin/logout';
-$route['pajak-rokok'] = 'admin/pajak_rokok';
-$route['pajak-hotel'] = 'admin/pajak_hotel';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

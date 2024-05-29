@@ -22,7 +22,7 @@ public function login_process($user_id,$password)
 public function listgudang()
 {
 	
-	$sql = $this->db->query("select * from gudang")->result_array();
+	$sql = $this->db->query("select * from tbl_gudang")->result_array();
 	return $sql;
 
 }
